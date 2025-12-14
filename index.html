@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berkut 1 — Новое поколение российского ИИ</title>
+    <meta name="description" content="Berkut 1 — это первая российская frontier‑модель нового уровня, созданная для решения сложных инженерных, аналитических, юридических и научных задач. Узнайте о ее архитектуре, возможностях и технологиях.">
+    <meta name="keywords" content="Berkut 1, ИИ, искусственный интеллект, российская модель, Arlist Research, System 2 Thinking, frontier model, NLP, large language model, нейросеть, большая языковая модель">
+    <link rel="canonical" href="https://arlist-research.tech/">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <meta property="og:title" content="Berkut 1 — Новое поколение российского ИИ">
+    <meta property="og:description" content="Berkut 1 — это первая российская frontier‑модель нового уровня, созданная для решения сложных инженерных, аналитических, юридических и научных задач. Узнайте о ее архитектуре, возможностях и технологиях.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arlist-research.tech/">
+    <meta property="og:site_name" content="Arlist Research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Berkut 1 — Новое поколение российского ИИ">
+    <meta name="twitter:description" content="Berkut 1 — это первая российская frontier‑модель нового уровня, созданная для решения сложных инженерных, аналитических, юридических и научных задач. Узнайте о ее архитектуре, возможностях и технологиях.">
+    <link rel="stylesheet" href="intro.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        bg: '#000000',
+                        text: '#ffffff',
+                        muted: '#a3a3a3',
+                        border: '#2e2e2e'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #000000;
+            color: #e5e5e5;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        /* Typography Defaults */
+        h2 {
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            font-size: 2rem !important;
+            margin-top: 2.5rem !important;
+            margin-bottom: 1.25rem !important;
+            letter-spacing: -0.03em !important;
+            border-top: 1px solid #1a1a1a !important;
+            padding-top: 1.5rem !important;
+        }
+
+        h2.first-section {
+            margin-top: 0 !important;
+            border-top: none !important;
+            padding-top: 0 !important;
+        }
+
+        h3 {
+            color: #ffffff !important;
+            font-weight: 500 !important;
+            font-size: 1.4rem !important;
+            margin-top: 1.75rem !important;
+            margin-bottom: 0.75rem !important;
+            letter-spacing: -0.02em !important;
+        }
+
+        p {
+            margin-bottom: 1rem !important;
+            color: #a3a3a3;
+            font-size: 1rem;
+            line-height: 1.65;
+        }
+
+        strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Smooth Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animated-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Minimalist Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            text-align: left;
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+            color: #737373;
+            font-weight: 500;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 14px 0;
+            border-bottom: 1px solid #1a1a1a;
+            color: #a3a3a3;
+            font-size: 0.95rem;
+            transition: color 0.15s ease;
+        }
+
+        .data-table tr:hover td {
+            color: #ffffff;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table .score {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+            text-align: right;
+            font-size: 0.95rem;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0 2rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .feature-card {
+            background: #050505;
+            border: 1px solid #1f1f1f;
+            padding: 1.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .feature-card:hover {
+            border-color: #404040;
+            background: #0a0a0a;
+            transform: translateY(-1px);
+        }
+
+        .feature-card h4 {
+            color: #ffffff;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+            transition: color 0.2s ease;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #888;
+            margin: 0 !important;
+            line-height: 1.55;
+        }
+
+        /* Metric Box */
+        .metric-box {
+            background: #050505;
+            border: 1px solid #1f1f1f;
+            padding: 1.5rem;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .metric-box:hover {
+            border-color: #404040;
+            background: #0a0a0a;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            letter-spacing: -0.03em;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        /* Links */
+        a {
+            transition: all 0.15s ease;
+            text-decoration-thickness: 1px;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="intro-block">
+        <div class="container">
+          <div class="text-content">
+            <h1>Представляем</h1>
+            <h2>Berkut 1</h2>
+            <p>Новая флагманская российская модель</p>
+          </div>
+        </div>
+    </section>
+
+    <div id="nav-trigger" style="position: absolute; top: 100vh; height: 1px;"></div>
+
+    <!-- Top Navigation -->
+    <nav id="main-nav" class="fixed top-0 w-full bg-black z-50 border-b border-white/10 h-14 flex items-center transition-all duration-300">
+                    <div class="max-w-[1200px] w-full mx-auto pl-5 pr-6 flex justify-between items-center">            <div id="nav-title" class="font-semibold tracking-tight text-white text-sm">Arlist Research</div>
+            <div id="nav-links" class="flex gap-6 text-sm text-gray-400">
+                <a href="#overview" class="hover:text-white transition-colors">Обзор</a>
+                <a href="#architecture" class="hover:text-white transition-colors">Архитектура</a>
+                <a href="#benchmarks" class="hover:text-white transition-colors">Бенчмарки</a>
+                <span id="nav-version" class="text-white ml-2">v1.0</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="px-6 pb-20 pt-20 max-w-[780px] mx-auto">
+
+        <!-- Header -->
+        <header class="text-left mb-12" id="overview">
+            <div class="flex items-center gap-3 text-xs font-mono text-gray-500 mb-8 uppercase tracking-wider">
+                <span>Product Release</span>
+                <span class="w-px h-3 bg-gray-700"></span>
+                <span>Dec 12, 2025</span>
+            </div>
+
+            <h1 class="text-5xl md:text-6xl font-semibold tracking-tight text-white mb-8 leading-tight animate-fade-in">
+                Berkut 1 — Новое поколение российского искусственного интеллекта
+            </h1>
+
+            <p class="text-xl text-gray-400 font-normal leading-relaxed max-w-2xl">
+                Обзор, философия и ключевые технологии модели.
+            </p>
+        </header>
+
+        <!-- Article Body -->
+        <article>
+
+            <!-- Введение -->
+            <section class="animated-section">
+                <h2 class="first-section">Введение</h2>
+                <p>
+                    <strong>Berkut 1</strong> — это первая российская frontier‑модель нового уровня, созданная для
+                    решения сложных инженерных, аналитических, юридических и научных задач. Она сочетает высокую
+                    точность и глубокие рассуждения благодаря архитектуре System 2 Thinking.
+                </p>
+                <p>
+                    Модель разработана российской исследовательской командой Arlist Research для профессионального
+                    использования, при этом полностью сохраняя приватность данных и техническую автономию.
+                </p>
+            </section>
+
+            <!-- Ключевые особенности (Grid) -->
+            <section class="animated-section">
+                <h2>Ключевые особенности</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>Глубокое рассуждение</h4>
+                        <p>Архитектура System 2 Thinking. Модель планирует решение, проверяет промежуточные шаги и
+                            формирует итоговый вывод.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Суверенная архитектура</h4>
+                        <p>Работает на российских серверах; данные не покидают РФ.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Экономичность</h4>
+                        <p>Производительность уровня моделей 70B+ при размере около 7B активных параметров.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Русскоязычная экспертиза</h4>
+                        <p>Качественно понимает юридические, технические и культурные особенности.</p>
+                    </div>
+                    <div class="feature-card col-span-1 sm:col-span-2">
+                        <h4>128K контекста</h4>
+                        <p>Анализ документов от 200 страниц и больше.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Архитектура -->
+            <section id="architecture" class="animated-section">
+                <h2>Архитектура Berkut Thinking</h2>
+
+                <h3>Двухэтапная модель вычислений</h3>
+                <div class="grid grid-cols-1 gap-4 my-8">
+                    <div class="flex flex-col sm:flex-row gap-6 p-6 border border-[#1f1f1f] rounded-lg bg-[#050505]">
+                        <div class="font-mono text-gray-500 text-xs uppercase pt-1 min-w-[90px]">Phase 1</div>
+                        <div>
+                            <strong class="text-white block mb-2 text-lg">Thinking</strong>
+                            <p class="text-base m-0 text-gray-400 leading-relaxed">Скрытый внутренний монолог,
+                                включающий декомпозицию
+                                задачи, построение плана, проверку логической согласованности и коррекцию ошибок.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-6 p-6 border border-[#1f1f1f] rounded-lg bg-[#050505]">
+                        <div class="font-mono text-gray-500 text-xs uppercase pt-1 min-w-[90px]">Phase 2</div>
+                        <div>
+                            <strong class="text-white block mb-2 text-lg">Output</strong>
+                            <p class="text-base m-0 text-gray-400 leading-relaxed">Финальный ответ с разъяснением
+                                логики, альтернативами и
+                                оценкой надежности.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Технологическая база</h3>
+                <div class="flex flex-wrap gap-2 text-sm text-gray-400 mt-6 mb-4">
+                    <span
+                        class="border border-[#1f1f1f] px-4 py-2 rounded-md hover:border-[#404040] transition-colors cursor-default">Transformer
+                        + RoPE + Post‑LN</span>
+                    <span
+                        class="border border-[#1f1f1f] px-4 py-2 rounded-md hover:border-[#404040] transition-colors cursor-default">MoE
+                        (8 экспертов)</span>
+                    <span
+                        class="border border-[#1f1f1f] px-4 py-2 rounded-md hover:border-[#404040] transition-colors cursor-default">GQA
+                        Attention</span>
+                    <span
+                        class="border border-[#1f1f1f] px-4 py-2 rounded-md hover:border-[#404040] transition-colors cursor-default">ALiBi</span>
+                    <span
+                        class="border border-[#1f1f1f] px-4 py-2 rounded-md hover:border-[#404040] transition-colors cursor-default">RU
+                        Tokenizer</span>
+                </div>
+            </section>
+
+            <!-- Программирование -->
+            <section id="benchmarks" class="animated-section">
+                <h2>Возможности в программировании</h2>
+                <p>
+                    Berkut 1 демонстрирует выдающиеся результаты в задачах разработки. Модель понимает Python, C++, Go,
+                    TypeScript, SQL, 1С, БСП, а также DevOps‑инструменты и стандарты OWASP.
+                </p>
+
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Benchmark</th>
+                            <th class="text-right">Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HumanEval</td>
+                            <td class="score">93.5%</td>
+                        </tr>
+                        <tr>
+                            <td>MBPP</td>
+                            <td class="score">88.2%</td>
+                        </tr>
+                        <tr>
+                            <td>SWE‑bench Verified</td>
+                            <td class="score">41.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Аналитика (Metrics Grid) -->
+            <section class="animated-section">
+                <h2>Профессиональная аналитика</h2>
+
+                <h3>Юридический анализ</h3>
+                <p>Модель умеет проверять договоры на соответствие ГК РФ и ФЗ, выявлять противоречия, анализировать
+                    риски.</p>
+                <div class="grid grid-cols-2 gap-4 mb-8 mt-4">
+                    <div class="metric-box">
+                        <div class="metric-value">89%</div>
+                        <div class="metric-label">Точность анализа</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">~45 sec</div>
+                        <div class="metric-label">Время (50 стр)</div>
+                    </div>
+                </div>
+
+                <h3>Финансовая аналитика</h3>
+                <p>Построение P&L, поиск ошибок, оценка метрик.</p>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div class="metric-box">
+                        <div class="metric-value">97.2%</div>
+                        <div class="metric-label">Арифм. точность</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">94%</div>
+                        <div class="metric-label">Структурирование</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Математика -->
+            <section class="animated-section">
+                <h2>Математика и научные вычисления</h2>
+                <p>Berkut 1 строит корректные цепочки доказательств, решает сложные олимпиадные задачи.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Benchmark</th>
+                            <th class="text-right">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GSM8K</td>
+                            <td class="score">89.4%</td>
+                        </tr>
+                        <tr>
+                            <td>AIME</td>
+                            <td class="score">72.0%</td>
+                        </tr>
+                        <tr>
+                            <td>FrontierMath</td>
+                            <td class="score">31.2%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Длинные документы & Безопасность -->
+            <section class="animated-section">
+                <h2>Работа с документами и безопасность</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="!mt-0">Контекст 128K</h3>
+                        <p class="text-sm">Позволяет анализировать контракты, техдокументацию, аудиторские отчёты и
+                            научные статьи. Модель успешно выдерживает тест MRCR.</p>
+                    </div>
+                    <div>
+                        <h3 class="!mt-0">Безопасность</h3>
+                        <p class="text-sm">Модель не использует «жёсткую цензуру», а объясняет принципы безопасности.
+                            Ограничения касаются только опасных инструкций. <strong>Cutoff знаний — сентябрь
+                                2025.</strong></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Доступность (3 Columns) -->
+            <section class="animated-section">
+                <h2>Доступность и интеграция</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6">
+                    <div class="feature-card text-center">
+                        <h4 class="mb-2">Chat‑интерфейс</h4>
+                        <p class="mb-3">Бесплатный доступ в бета‑версии</p>
+                        <a href="https://chat.arlist.tech"
+                            class="text-white text-sm border-b border-white pb-0.5 hover:text-[#a3a3a3] hover:border-[#a3a3a3] transition-all">chat.arlist.tech</a>
+                    </div>
+                    <div class="feature-card text-center">
+                        <h4 class="mb-2">API</h4>
+                        <p>Полностью совместим с OpenAI API — достаточно заменить base_url.</p>
+                    </div>
+                    <div class="feature-card text-center">
+                        <h4 class="mb-2">On‑Premise</h4>
+                        <p>Возможность развёртывания на собственных серверах.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Дорожная карта -->
+            <section class="animated-section">
+                <h2>Дорожная карта</h2>
+                <div class="flex items-center gap-6 p-6 border border-[#1f1f1f] rounded-lg bg-[#050505] mt-8">
+                    <div class="font-mono text-white text-3xl font-semibold">2026</div>
+                    <div class="h-12 w-px bg-[#333]"></div>
+                    <p class="m-0 text-lg text-gray-400 leading-relaxed">Расширение контекста до 256K,
+                        мультимодальность, Vision‑модель,
+                        интеграции с IDE, релиз Berkut 2.</p>
+                </div>
+            </section>
+
+            <!-- Заключение -->
+            <section class="mt-16 pt-8 border-t border-[#1f1f1f] animated-section">
+                <h2 class="!border-0 !p-0 !mt-0 !mb-6">Заключение
+                </h2>
+                <p>
+                    Berkut 1 — это шаг к технологической независимости, инструмент для инженеров, юристов, аналитиков и
+                    всех специалистов, которым требуется надёжный и умный AI.
+                </p>
+                <p class="!mb-0">
+                    Он сочетает мощность, приватность и высокую русскоязычную компетентность, создавая новую точку опоры
+                    для российской технологической экосистемы.
+                </p>
+
+                <footer class="mt-12 text-sm text-gray-500 font-mono">
+                    Arlist Research Team, 2025
+                </footer>
+            </section>
+
+        </article>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Animate sections on scroll
+            const animatedSections = document.querySelectorAll('.animated-section');
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+
+            animatedSections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Change nav background on scroll
+            const mainNav = document.getElementById('main-nav');
+            const navTrigger = document.getElementById('nav-trigger');
+            const navTitle = document.getElementById('nav-title');
+            const navLinks = document.getElementById('nav-links').querySelectorAll('a');
+            const navVersion = document.getElementById('nav-version');
+
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // When the trigger is visible, we are below the intro (white nav)
+                        mainNav.classList.remove('bg-black');
+                        mainNav.classList.add('bg-white/90', 'backdrop-blur-md');
+                        
+                        navTitle.classList.replace('text-white', 'text-black');
+                        navVersion.classList.replace('text-white', 'text-black');
+                        navLinks.forEach(link => {
+                            link.classList.replace('text-gray-400', 'text-gray-800');
+                            link.classList.replace('hover:text-white', 'hover:text-black');
+                        });
+
+                    } else {
+                        // When the trigger is not visible, we are in the intro (black nav)
+                        mainNav.classList.remove('bg-white/90', 'backdrop-blur-md');
+                        mainNav.classList.add('bg-black');
+
+                        navTitle.classList.replace('text-black', 'text-white');
+                        navVersion.classList.replace('text-black', 'text-white');
+                        navLinks.forEach(link => {
+                            link.classList.replace('text-gray-800', 'text-gray-400');
+                            link.classList.replace('hover:text-black', 'hover:text-white');
+                        });
+                    }
+                });
+            }, { 
+                rootMargin: "-56px 0px 0px 0px", // 56px is the height of the h-14 nav bar
+                threshold: 0 
+            });
+
+            if (navTrigger) {
+                navObserver.observe(navTrigger);
+            }
+        });
+    </script>
+
+</body>
+
+</html>

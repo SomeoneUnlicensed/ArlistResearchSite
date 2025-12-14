@@ -1,0 +1,88 @@
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#intro-block {
+  background: linear-gradient(to right bottom, #E0F7FA, #FCE4EC);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  overflow: hidden;
+  position: relative;
+}
+
+#intro-block .container {
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+#intro-block .text-content {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+#intro-block h1 {
+  font-size: 6vw;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(to right, #4DB6AC, #9C27B0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: unset !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+  letter-spacing: normal !important;
+  animation: fadeInUp 0.5s ease-out 0.2s;
+  animation-fill-mode: backwards;
+}
+
+#intro-block h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 6vw;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(to right, #4DB6AC, #2979FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: unset !important;
+  font-size: 6vw !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  letter-spacing: normal !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+  animation: fadeInUp 0.5s ease-out 0.4s;
+  animation-fill-mode: backwards;
+}
+
+#intro-block p {
+  font-size: 1.5vw;
+  font-weight: 400;
+  margin-top: 20px;
+  color: #333;
+  margin-bottom: 0 !important;
+  line-height: 1.2;
+  animation: fadeInUp 0.5s ease-out 0.6s;
+  animation-fill-mode: backwards;
+}
+
+#intro-block .logo-container {
+  display: none;
+}

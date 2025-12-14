@@ -1,0 +1,44 @@
+/* modern.css */
+
+/* Glassmorphism Nav Bar */
+nav.fixed.top-0 {
+    background-color: rgba(0, 0, 0, 0.75) !important; /* More transparent */
+    backdrop-filter: blur(16px) !important; /* More blur */
+    border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Gradient Glow on Cards */
+.feature-card, .metric-box {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    border-radius: 6px; /* Ensure this matches the element's border-radius */
+}
+
+.feature-card::before, .metric-box::before {
+    content: '';
+    position: absolute;
+    z-index: -2; /* Behind the content */
+    left: -50%;
+    top: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        transparent,
+        rgba(168, 85, 247, 0.5),
+        transparent 30%
+    );
+    animation: rotate 4s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.feature-card:hover::before, .metric-box:hover::before {
+    opacity: 1;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(1turn);
+    }
+}

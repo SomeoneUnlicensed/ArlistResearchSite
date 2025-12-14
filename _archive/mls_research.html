@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLS | Архитектура Многоуровневого Согласования ИИ</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #a3a3a3;
+            line-height: 1.7;
+        }
+        h1, h2, h3, h4, .font-serif {
+            font-family: 'Merriweather', serif;
+            color: #ffffff;
+        }
+        .content a {
+            color: #34d399; /* A bright green for accent on dark background */
+            text-decoration: none;
+            border-bottom: 1px solid #34d399;
+        }
+        .content a:hover {
+            color: #a7f3d0;
+            border-bottom-color: #a7f3d0;
+        }
+        .toc a {
+            transition: all 0.2s ease;
+        }
+        .toc a:hover, .toc a.active {
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+        .border-color {
+            border-color: #2e2e2e;
+        }
+    </style>
+</head>
+<body class="antialiased bg-[#0a0a0a]">
+
+    <header class="bg-[#111111] border-b border-color py-4 sticky top-0 z-20">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-3 h-3 bg-[#34d399]"></div>
+                <span class="font-serif font-bold text-white">Arlist Research</span>
+            </div>
+            <a href="final_research_page.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">
+                &larr; На главную
+            </a>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mt-12">
+        
+        <!-- Table of Contents -->
+        <aside class="md:col-span-1 md:sticky top-24 h-screen">
+            <h3 class="font-semibold text-sm uppercase tracking-wider text-gray-500 mb-4">Содержание</h3>
+            <nav class="toc text-sm text-gray-400 flex flex-col gap-3">
+                <a href="#problem-def">1. Проблема согласования</a>
+                <a href="#mls-arch">2. Архитектура MLS</a>
+                <a href="#level-a">3. Уровень A: Ядро мотивации</a>
+                <a href="#level-b">4. Уровень B: Надзор</a>
+                <a href="#level-c">5. Уровень C: Институты</a>
+                <a href="#level-d">6. Уровень D: Эволюция</a>
+                <a href="#verticals">7. Вертикальные нити</a>
+                <a href="#conflicts">8. Конфликты ценностей</a>
+                <a href="#is-it-complete">9. Насколько это полное решение?</a>
+                <a href="#conclusion">10. Заключение</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="md:col-span-3 content">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl font-bold font-serif leading-tight">Архитектура «Многоуровневого согласования ИИ» (MLS)</h1>
+                <p class="text-lg text-gray-400 mt-2">Попытка полного решения проблемы alignment</p>
+                <p class="text-sm text-gray-400 mt-6 border-t border-color pt-6">
+                    Прежде чем переходить к деталям, сформулирую основной замысел. Я опишу цельную архитектуру многоуровневого согласования ИИ (Multi‑Layered Alignment System, MLS), которая одновременно охватывает:
+                </p>
+                <ul class="list-disc list-inside text-gray-400 my-4 space-y-2">
+                    <li>внутренние цели и мотивацию ИИ (внутреннее согласование),</li>
+                    <li>поведение ИИ в мире (поведенческое согласование),</li>
+                    <li>социально‑политическую оболочку (институты, законы, стандарты),</li>
+                    <li>динамику взаимодействия с человечеством на горизонте появления сверхразумных систем.</li>
+                </ul>
+                <p class="text-gray-400">
+                    Ключевая идея: не пытаться найти один «магический» технический трюк, а построить сцепленную архитектуру из нескольких слоёв, где каждый слой страхует остальные, а сами ИИ используются как основной инструмент для улучшения согласования следующих поколений. Такой подход развивается уже сейчас в виде RLHF, итеративной амплификации, «конституционного ИИ» и систематических обзоров alignment‑методов, но в разрозненном виде. Я сведу это в единую, радикально усиленную схему, рассчитанную вплоть до эпохи сверхразума.
+                </p>
+
+                <section id="problem-def" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">1. Проблема согласования ИИ: постановка задачи и ограничения</h2>
+                    <h3 class="text-2xl font-bold font-serif mt-8">1.1. Что вообще нужно согласовать?</h3>
+                    <p class="mt-4 text-gray-400">Под проблемой согласования ИИ будем понимать задачу создания таких искусственных агентов, которые, будучи намного более способными, чем отдельный человек или организация, будут:</p>
+                    <ul class="list-disc list-inside text-gray-400 my-4 space-y-2">
+                        <li>надёжно оптимизировать мир в направлении, приемлемом для человечества в целом;</li>
+                        <li>оставаться корригируемыми: готовы к перезапуску, перепрограммированию, остановке, проверке человеком или системой институтов;</li>
+                        <li>не развивать скрытых целей, враждебных явным требованиям;</li>
+                        <li>устойчиво вести себя адекватно даже в условиях сильного изменения среды и распределения данных.</li>
+                    </ul>
+                </section>
+                
+                <section id="mls-arch" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">2. Общая архитектура MLS: многоуровневое согласование ИИ</h2>
+                    <p class="mt-4 text-gray-400">Я предложу архитектуру MLS (Multi‑Layered Alignment System), состоящую из четырёх горизонтальных уровней и нескольких вертикальных «нитей»:</p>
+                     <ul class="list-disc list-inside text-gray-400 my-4 space-y-2">
+                        <li>Уровень A: ядро мотивации ИИ (внутреннее согласование).</li>
+                        <li>Уровень B: поведенческое согласование и масштабируемый надзор.</li>
+                        <li>Уровень C: институциональная оболочка и механизм «общественной конституции».</li>
+                        <li>Уровень D: динамика эволюции систем, самосовершенствование, защита от «побега» и захвата мира.</li>
+                    </ul>
+                </section>
+                
+                <section id="level-a" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">3. Уровень A: ядро мотивации ИИ и внутреннее согласование</h2>
+                     <p class="mt-4 text-gray-400">Большая часть нынешних методов сосредоточена на поведенческой подгонке: мы показываем примеры хорошего/плохого поведения и надеемся, что внутренняя цель системы будет «что‑то вроде этого». Однако работы, анализирующие alignment с точки зрения глубинного обучения, подчёркивают, что внутренние цели могут быть совершенно иными, даже если поведение в обучающей среде кажется корректным.</p>
+                </section>
+                
+                <section id="level-b" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">4. Уровень B: масштабируемый надзор и поведенческое согласование</h2>
+                    <p class="mt-4 text-gray-400">Текущие схемы вроде RLHF и их расширения уже формируют основу поведенческого согласования: обучение с человеческой обратной связью, затем использование моделей для помощи людям в оценке сложных ответов, затем — использование целых иерархий агентов (итеративная амплификация, debate, recursive reward modeling).</p>
+                </section>
+                
+                <section id="level-c" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">5. Уровень C: общественная конституция и институциональная оболочка</h2>
+                     <p class="mt-4 text-gray-400">Подход «конституционного ИИ» уже демонстрирует, что можно обучать модели, ориентируясь на набор принципов (конституцию), а не только на индивидуальную человеческую оценку. В MLS эта идея радикализуется.</p>
+                </section>
+
+                <section id="level-d" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">6. Уровень D: эволюция систем, самосовершенствование и защита от захвата мира</h2>
+                     <p class="mt-4 text-gray-400">Современные планы крупных лабораторий предполагают, что одна из основных целей первых «почти AGI» будет именно ускорение исследований по согласованию: мы обучаем систему делать alignment‑исследования лучше людей, а затем используем эту систему для разработки методов согласования ещё более мощных ИИ.</p>
+                </section>
+
+                <section id="verticals" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">7. Вертикальные нити: интерпретируемость, устойчивость, согласование репрезентаций</h2>
+                     <p class="mt-4 text-gray-400">Работы по глубокому анализу alignment‑проблемы подчёркивают, что без понимания внутренних репрезентаций мы не можем надёжно судить о целях системы.</p>
+                </section>
+                
+                <section id="conflicts" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">8. Конфликты ценностей и политическая реальность</h2>
+                     <p class="mt-4 text-gray-400">Даже идеальный технический alignment не решает вопрос: чьи ценности реализует ИИ? Внутри человечества существуют противоречивые представления о справедливости, свободе, допустимом риске.</p>
+                </section>
+                
+                <section id="is-it-complete" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">9. Насколько MLS можно считать «полным» решением?</h2>
+                    <p class="mt-4 text-gray-400">Можно предложить следующие критерии для того, чтобы претендовать на «полное» решение alignment: Отсутствие однокритериальности, Скалируемость до сверхразумных систем, Сопряжение с человеческими институтами, Встроенная петля самосовершенствования согласования.</p>
+                </section>
+                
+                <section id="conclusion" class="mt-12 pt-8 border-t border-color">
+                    <h2 class="text-3xl font-bold font-serif">10. Заключение</h2>
+                    <p class="mt-4 text-gray-400">Предложенная архитектура Multi‑Layered Alignment System (MLS) — это попытка собрать воедино лучшие текущие идеи alignment‑исследований и расширить их до проекта, который теоретически может закрыть проблему согласования ИИ вплоть до эпохи сверхразумных систем.</p>
+                </section>
+
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>

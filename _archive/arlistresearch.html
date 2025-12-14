@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arlist Research | Academic Futurism</title>
+    
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+        h1, h2, h3, h4, h5, h6, .serif-font {
+            font-family: 'Merriweather', serif;
+        }
+        .academic-border {
+            border-top: 1px solid #e5e5e5;
+        }
+        .academic-border-b {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        /* Custom scrollbar for strictly clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+    </style>
+    
+    <!-- Tailwind Config for Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        arlist: {
+                            black: '#1a1a1a',
+                            gray: '#f4f4f5',
+                            accent: '#0f766e', /* Deep Teal */
+                            blue: '#1e3a8a', /* Deep Blue */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        
+        // --- COMPONENTS ---
+
+        // 1. Icon Component wrapper
+        const Icon = ({ name, size = 24, className }) => {
+            const lucideIcon = window.lucide ? window.lucide.icons[name] : null;
+            if (!lucideIcon) return null;
+            
+            // Render SVG string to React element logic simplified for CDN usage
+            // In a real build step we'd import, but here we use a simple placeholder or svg injection
+            // Since lucide.icons[name] returns an object with toSvg in browser, we can't easily render it as component directly without parsing
+            // So we will use basic SVG placeholders for specific icons needed or simplistic rendering
+            
+            // Fallback simplistic SVGs for this demo to ensure stability without complex parsing
+            if (name === "ArrowRight") return <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>;
+            if (name === "Download") return <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>;
+            if (name === "Microscope") return <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></svg>;
+            if (name === "ShieldCheck") return <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>;
+            if (name === "Dna") return <svg className={className} width={size} height={size} viewBox="0 2 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m2 15 5-5.9a1 1 0 0 1 1.5 0l5.1 5.9a1 1 0 0 1 1.5 0l5-5.9"/><path d="m2 9 5 5.9a1 1 0 0 1 1.5 0l5.1-5.9a1 1 0 0 1 1.5 0l5 5.9"/><line x1="8" x2="8" y1="9" y2="15"/><line x1="16" x2="16" y1="9" y2="15"/></svg>;
+            
+            return null;
+        };
+
+        // 2. Abstract Background Animation (Graph/Topology)
+        const BackgroundGraph = () => {
+            const canvasRef = useRef(null);
+
+            useEffect(() => {
+                const canvas = canvasRef.current;
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                let particles = [];
+
+                const resize = () => {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                };
+
+                const createParticles = () => {
+                    particles = [];
+                    const count = window.innerWidth < 768 ? 30 : 60; // Fewer particles on mobile
+                    for (let i = 0; i < count; i++) {
+                        particles.push({
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            vx: (Math.random() - 0.5) * 0.3,
+                            vy: (Math.random() - 0.5) * 0.3,
+                            size: Math.random() * 2 + 1
+                        });
+                    }
+                };
+
+                const draw = () => {
+                    ctx.clearRect(0, 0, width, height);
+                    
+                    // Update positions
+                    particles.forEach(p => {
+                        p.x += p.vx;
+                        p.y += p.vy;
+
+                        if (p.x < 0 || p.x > width) p.vx *= -1;
+                        if (p.y < 0 || p.y > height) p.vy *= -1;
+                    });
+
+                    // Draw connections
+                    ctx.strokeStyle = 'rgba(15, 118, 110, 0.1)'; // Teal with low opacity
+                    ctx.lineWidth = 1;
+
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i + 1; j < particles.length; j++) {
+                            const dx = particles[i].x - particles[j].x;
+                            const dy = particles[i].y - particles[j].y;
+                            const dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (dist < 150) {
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+
+                    // Draw particles (nodes)
+                    particles.forEach(p => {
+                        ctx.fillStyle = '#0f766e'; // Teal accent
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+
+                    requestAnimationFrame(draw);
+                };
+
+                window.addEventListener('resize', () => {
+                    resize();
+                    createParticles();
+                });
+
+                resize();
+                createParticles();
+                draw();
+
+                return () => window.removeEventListener('resize', resize);
+            }, []);
+
+            return (
+                <canvas 
+                    ref={canvasRef} 
+                    className="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-40"
+                />
+            );
+        };
+
+        // 3. Navigation
+        const Navbar = () => (
+            <nav className="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100">
+                <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 bg-arlist-accent"></div>
+                        <span className="serif-font text-lg font-bold tracking-tight text-arlist-black">Arlist Research</span>
+                    </div>
+                    <div className="hidden md:flex gap-8 text-sm font-medium text-gray-500">
+                        <a href="#mission" className="hover:text-arlist-accent transition-colors">Миссия</a>
+                        <a href="#research" className="hover:text-arlist-accent transition-colors">Исследования</a>
+                        <a href="#library" className="hover:text-arlist-accent transition-colors">Библиотека</a>
+                        <a href="#careers" className="hover:text-arlist-accent transition-colors">Лаборатория</a>
+                    </div>
+                    <button className="text-sm font-medium text-arlist-black border border-gray-300 px-4 py-1.5 hover:bg-black hover:text-white transition-all duration-300 rounded-sm">
+                        Связаться
+                    </button>
+                </div>
+            </nav>
+        );
+
+        // 4. Hero Section
+        const Hero = () => (
+            <section id="mission" className="relative min-h-[90vh] flex items-center justify-center pt-20 z-10">
+                <div className="max-w-4xl mx-auto px-6 text-center animate-fade-in">
+                    <div className="inline-block mb-6 px-3 py-1 bg-gray-100 text-xs font-semibold tracking-widest text-gray-500 uppercase rounded-sm border border-gray-200">
+                        Москва • Est. 2024
+                    </div>
+                    <h1 className="text-5xl md:text-7xl font-light text-arlist-black mb-8 leading-tight tracking-tight">
+                        Интеллект, который <br/>
+                        <span className="italic font-normal font-serif text-arlist-accent">защищает будущее.</span>
+                    </h1>
+                    <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed mb-12">
+                        Arlist Research — это междисциплинарная лаборатория, объединяющая традиции <span className="text-arlist-black font-medium">фундаментальной математической школы</span> и передовые исследования в области AI Safety.
+                    </p>
+                    <div className="flex flex-col md:flex-row gap-4 justify-center">
+                        <button className="group bg-arlist-black text-white px-8 py-3 text-sm tracking-wide font-medium hover:bg-arlist-accent transition-all duration-300 flex items-center justify-center gap-2 rounded-sm">
+                            Читать Наш Манифест
+                            <Icon name="ArrowRight" size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        <button className="bg-transparent border border-gray-300 text-arlist-black px-8 py-3 text-sm tracking-wide font-medium hover:border-arlist-accent hover:text-arlist-accent transition-all duration-300 rounded-sm">
+                            Последние Исследования
+                        </button>
+                    </div>
+                </div>
+            </section>
+        );
+
+        // 5. Research Areas
+        const ResearchCard = ({ number, title, text, icon }) => (
+            <div className="group border border-gray-200 p-8 hover:border-arlist-accent/50 transition-all duration-500 bg-white hover:shadow-lg hover:shadow-gray-100/50 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-0 bg-arlist-accent group-hover:h-full transition-all duration-500"></div>
+                <div className="flex justify-between items-start mb-6">
+                    <span className="font-mono text-xs text-gray-400">{number}</span>
+                    <div className="text-gray-300 group-hover:text-arlist-accent transition-colors duration-300">
+                        {icon}
+                    </div>
+                </div>
+                <h3 className="text-2xl font-serif text-arlist-black mb-4 group-hover:text-arlist-accent transition-colors duration-300">
+                    {title}
+                </h3>
+                <p className="text-gray-600 font-light leading-relaxed text-sm">
+                    {text}
+                </p>
+                <div className="mt-8 pt-4 border-t border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="text-xs font-bold tracking-widest uppercase text-arlist-accent cursor-pointer flex items-center gap-2">
+                        Подробнее <Icon name="ArrowRight" size={12} />
+                    </span>
+                </div>
+            </div>
+        );
+
+        const ResearchSection = () => (
+            <section id="research" className="py-24 bg-arlist-gray relative z-10">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="mb-16 border-b border-gray-300 pb-4 flex justify-between items-end">
+                        <h2 className="text-3xl font-serif text-arlist-black">Направления Исследований</h2>
+                        <span className="hidden md:block text-gray-400 font-mono text-xs">RESEARCH AREAS / 2025</span>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <ResearchCard 
+                            number="01"
+                            title="Artificial General Intelligence"
+                            text="Создание моделей с глубоким рассуждением (Reasoning), способных решать неразрешимые задачи. Проект Berkut."
+                            icon={<Icon name="Microscope" size={28} />}
+                        />
+                        <ResearchCard 
+                            number="02"
+                            title="AI Safety & Alignment"
+                            text="Разработка Конституций ИИ. Как математически гарантировать, что сверх-интеллект будет действовать в интересах людей?"
+                            icon={<Icon name="ShieldCheck" size={28} />}
+                        />
+                        <ResearchCard 
+                            number="03"
+                            title="Beyond Silicon"
+                            text="Применение ИИ для моделирования биологических процессов, новых материалов и энергетики. Наука для физического мира."
+                            icon={<Icon name="Dna" size={28} />}
+                        />
+                    </div>
+                </div>
+            </section>
+        );
+
+        // 6. Publications (Library)
+        const PublicationRow = ({ date, category, title }) => (
+            <div className="group grid grid-cols-1 md:grid-cols-12 gap-4 py-6 border-b border-gray-200 items-baseline hover:bg-gray-50 transition-colors cursor-pointer">
+                <div className="md:col-span-2 font-mono text-xs text-gray-500">{date}</div>
+                <div className="md:col-span-2 text-xs font-bold tracking-wider uppercase text-arlist-accent">{category}</div>
+                <div className="md:col-span-7">
+                    <h4 className="text-lg font-serif text-arlist-black group-hover:text-arlist-blue transition-colors mb-1">{title}</h4>
+                </div>
+                <div className="md:col-span-1 text-right flex justify-end">
+                     <Icon name="Download" size={18} className="text-gray-300 group-hover:text-arlist-black transition-colors" />
+                </div>
+            </div>
+        );
+
+        const LibrarySection = () => (
+            <section id="library" className="py-24 bg-white z-10 relative">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="mb-12">
+                        <h2 className="text-3xl font-serif text-arlist-black mb-2">Библиотека Знаний</h2>
+                        <p className="text-gray-500 font-light">Публикации, препринты и технические отчеты лаборатории.</p>
+                    </div>
+
+                    <div className="border-t border-gray-200">
+                        <PublicationRow 
+                            date="12.12.2025"
+                            category="AI Safety"
+                            title="Парадокс контроля: Методы ограничения рекурсивного самообучения в моделях 7B+."
+                        />
+                        <PublicationRow 
+                            date="10.11.2025"
+                            category="Berkut Research"
+                            title="RAGE-CoT: Эмпатия как побочный эффект глубоких цепочек рассуждений."
+                        />
+                        <PublicationRow 
+                            date="01.10.2025"
+                            category="Global Science"
+                            title="Моделирование климатических изменений с помощью малых языковых моделей."
+                        />
+                        <PublicationRow 
+                            date="15.08.2025"
+                            category="Bio-Informatics"
+                            title="Структурное предсказание белков: за пределами AlphaFold."
+                        />
+                    </div>
+                    
+                    <div className="mt-12 text-center">
+                        <a href="#" className="inline-block border-b border-arlist-black pb-1 text-sm font-medium hover:text-arlist-accent hover:border-arlist-accent transition-colors">
+                            Посмотреть весь архив
+                        </a>
+                    </div>
+                </div>
+            </section>
+        );
+
+        // 7. Ethics / Manifesto Block
+        const EthicsSection = () => (
+            <section className="py-24 bg-arlist-black text-white relative overflow-hidden z-10">
+                {/* Subtle Grid Background */}
+                <div className="absolute inset-0 opacity-10" 
+                     style={{backgroundImage: 'linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)', backgroundSize: '40px 40px'}}>
+                </div>
+                
+                <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+                    <Icon name="ShieldCheck" size={48} className="mx-auto mb-8 text-arlist-accent opacity-80" />
+                    <blockquote className="font-serif text-2xl md:text-4xl leading-relaxed mb-8 italic opacity-90">
+                        "Мы не гонимся за скоростью релиза. Мы гонимся за надежностью. Любая технология Arlist проходит этический аудит перед выходом в открытый доступ."
+                    </blockquote>
+                    <div className="h-px w-24 bg-arlist-accent mx-auto mb-6"></div>
+                    <p className="text-gray-400 text-sm tracking-widest uppercase">
+                        Манифест Ответственности Arlist
+                    </p>
+                </div>
+            </section>
+        );
+
+        // 8. Footer
+        const Footer = () => (
+            <footer className="bg-white pt-20 pb-10 border-t border-gray-200 z-10 relative">
+                <div className="max-w-6xl mx-auto px-6">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                        <div className="col-span-1 md:col-span-1">
+                            <div className="flex items-center gap-2 mb-6">
+                                <div className="w-3 h-3 bg-arlist-accent"></div>
+                                <span className="serif-font font-bold text-arlist-black">Arlist Research</span>
+                            </div>
+                            <p className="text-gray-500 text-sm leading-relaxed">
+                                Междисциплинарная лаборатория фундаментальных исследований интеллекта.
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h5 className="font-bold text-xs uppercase tracking-widest text-arlist-black mb-6">Team</h5>
+                            <ul className="space-y-4 text-sm text-gray-500">
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Руководство</a></li>
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Научные сотрудники</a></li>
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Попечительский совет</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h5 className="font-bold text-xs uppercase tracking-widest text-arlist-black mb-6">Join the Lab</h5>
+                            <ul className="space-y-4 text-sm text-gray-500">
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Открытые позиции</a></li>
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Программа резидентуры</a></li>
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Стажировки</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h5 className="font-bold text-xs uppercase tracking-widest text-arlist-black mb-6">Contact</h5>
+                            <ul className="space-y-4 text-sm text-gray-500">
+                                <li>Москва, Воробьёвы горы</li>
+                                <li>research@arlist.ai</li>
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">Telegram</a></li>
+                                <li><a href="#" className="hover:text-arlist-accent transition-colors">VK / Habr</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 font-mono">
+                        <p>&copy; 2025 Arlist Research Institute. All rights reserved.</p>
+                        <p>For the benefit of all.</p>
+                    </div>
+                </div>
+            </footer>
+        );
+
+        // Main App Component
+        const App = () => {
+            return (
+                <div className="antialiased text-slate-900 bg-white">
+                    <BackgroundGraph />
+                    <Navbar />
+                    <main>
+                        <Hero />
+                        <ResearchSection />
+                        <LibrarySection />
+                        <EthicsSection />
+                    </main>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
