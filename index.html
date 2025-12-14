@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="intro.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@400;700&display=swap"
         rel="stylesheet">
     <script>
         tailwind.config = {
@@ -47,6 +47,7 @@
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
+            overflow: hidden;
         }
 
         /* Typography Defaults */
@@ -257,9 +258,9 @@
     <section id="intro-block">
         <div class="container">
           <div class="text-content">
-            <h1>Скоро здесь будет что-то великое</h1>
-            <h2>Berkut 1</h2>
-            <p>Новая флагманская российская модель</p>
+            <h1>Здесь рождается<br>будущее</h1>
+            <h2 style="display:none;">Berkut 1</h2>
+            <p style="display:none;">Новая флагманская российская модель</p>
           </div>
         </div>
     </section>
@@ -269,7 +270,7 @@
     <!-- Top Navigation -->
     <nav id="main-nav" class="fixed top-0 w-full bg-black z-50 border-b border-white/10 h-14 flex items-center transition-all duration-300">
                     <div class="max-w-[1200px] w-full mx-auto pl-5 pr-6 flex justify-between items-center">            <div id="nav-title" class="font-semibold tracking-tight text-white text-sm">Arlist Research</div>
-            <div id="nav-links" class="flex gap-6 text-sm text-gray-400">
+            <div id="nav-links" class="flex gap-6 text-sm text-gray-400" style="display:none;">
                 <a href="#overview" class="hover:text-white transition-colors">Обзор</a>
                 <a href="#architecture" class="hover:text-white transition-colors">Архитектура</a>
                 <a href="#benchmarks" class="hover:text-white transition-colors">Бенчмарки</a>
@@ -281,7 +282,7 @@
     <main class="px-6 pb-20 pt-20 max-w-[780px] mx-auto">
 
         <!-- Header -->
-        <header class="text-left mb-12" id="overview">
+        <header class="text-left mb-12" id="overview" style="display:none;">
             <div class="flex items-center gap-3 text-xs font-mono text-gray-500 mb-8 uppercase tracking-wider">
                 <span>Product Release</span>
                 <span class="w-px h-3 bg-gray-700"></span>
